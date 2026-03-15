@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <!-- ─── List View: Conversation Log ──────────────────────────────────── -->
+  <record id="ai_chatbot_conversation_list_view" model="ir.ui.view">
+    <field name="name">ai.chatbot.conversation.list</field>
+    <field name="model">ai.chatbot.conversation</field>
+    <field name="arch" type="xml">
+      <tree string="AI Chatbot History" decoration-danger="STATUS=='error'"
+            decoration-success="STATUS=='success'" decoration-muted="STATUS in ('pending','blocked')">
+        <field name="create_date" string="Date"/>
+        <field name="USER_ID" string="User"/>
+        <field name="CHI_NHANH_ID" string="Branch"/>
+        <field name="USER_MESSAGE" string="Question"/>
+        <field name="STATUS" string="Status"/>
+        <field name="RESULT_COUNT" string="Row Count"/>
+        <field name="EXECUTION_TIME_MS" string="Time (ms)"/>
+        <field name="FEEDBACK" string="Feedback"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- ─── Form View: Conversation Detail ───────────────────────────────── -->
+  <record id="ai_chatbot_conversation_form_view" model="ir.ui.view">
+    <field name="name">ai.chatbot.conversation.form</field>
+    <field name="model">ai.chatbot.conversation</field>
+    <field name="arch" type="xml">
+      <form string="AI Conversation Detail" create="false" edit="false">
+        <sheet>
+          <group>
+            <group string="General Info">
+              <field name="create_date" string="Date"/>
+              <field name="USER_ID" string="User"/>
+              <field name="CHI_NHANH_ID" string="Branch"/>
+              <field name="STATUS" string="Status"/>
+              <field name="FEEDBACK" string="Feedback"/>
+            </group>
+            <group string="Performance">
+              <field name="RESULT_COUNT" string="Row Count"/>
+              <field name="EXECUTION_TIME_MS" string="Execution Time (ms)"/>
+            </group>
+          </group>
+          <group string="Question">
+            <field name="USER_MESSAGE" string="" nolabel="1" readonly="1"/>
+          </group>
+          <group string="Generated SQL">
+            <field name="GENERATED_SQL" string="" nolabel="1" readonly="1"
+                   widget="text" attrs="{'invisible': [('GENERATED_SQL', '=', False)]}"/>
+          </group>
+          <group string="AI Response">
+            <field name="AI_RESPONSE" string="" nolabel="1" readonly="1"
+                   attrs="{'invisible': [('AI_RESPONSE', '=', False)]}"/>
+          </group>
+          <group string="Error" attrs="{'invisible': [('ERROR_MESSAGE', '=', False)]}">
+            <field name="ERROR_MESSAGE" string="" nolabel="1" readonly="1"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- ─── Action: Open conversation log ────────────────────────────────── -->
+  <record id="action_ai_chatbot_conversation_log" model="ir.actions.act_window">
+    <field name="name">AI Chatbot History</field>
+    <field name="res_model">ai.chatbot.conversation</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+    <field name="view_id" ref="ai_chatbot_conversation_list_view"/>
+    <field name="context">{}</field>
+    <field name="domain">[]</field>
+  </record>
+
+</odoo>

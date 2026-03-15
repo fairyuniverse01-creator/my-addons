@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+
+  <t t-name="ai_chatbot.systray.AIChatbot">
+    <li class="o_ai_chatbot_systray_item" title="AI Chatbot">
+      <a href="#" style="cursor:pointer;">
+        AI
+        <!-- <i class="fa fa-flash" style="font-size:16px;"/> -->
+      </a>
+    </li>
+  </t>
+
+</templates>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+
+  <!--
+    AI Chatbot — Static layout scaffold.
+    All dynamic content (messages, history, examples) is injected by
+    ai_chatbot.js after render via _rerenderMessages() / _rerenderHistory() /
+    _rerenderExamples(). We avoid t-foreach/t-if here because Odoo 11 Widget
+    renders QWeb with context {widget: this}, so bare variable names like
+    `messages` or `exampleQueries` would be undefined at template-render time.
+  -->
+  <t t-name="AIChatbot.Main">
+    <div class="ai_chatbot_root">
+
+      <!-- ── Sidebar ─────────────────────────────────────────────────── -->
+      <div class="ai_chatbot_sidebar">
+        <div class="ai_chatbot_sidebar_header">
+          <span class="ai_chatbot_logo">⚡ AI Chatbot</span>
+          <button class="ai_chatbot_new_chat">+ New conversation</button>
+        </div>
+
+        <!-- Populated by _rerenderExamples() -->
+        <div class="ai_chatbot_sidebar_examples" id="ai_chatbot_examples">
+          <p class="ai_chatbot_examples_title">Suggested questions</p>
+        </div>
+
+        <div class="ai_chatbot_history_title">History</div>
+        <!-- Populated by _rerenderHistory() -->
+        <div class="ai_chatbot_history_list" id="ai_chatbot_history_list">
+          <div class="ai_chatbot_history_empty">Loading...</div>
+        </div>
+      </div>
+
+      <!-- ── Main chat area ──────────────────────────────────────────── -->
+      <div class="ai_chatbot_main">
+
+        <!-- Populated by _rerenderMessages() -->
+        <div class="ai_chatbot_messages" id="ai_chatbot_messages"/>
+
+        <!-- SQL Modal (hidden by default) -->
+        <div class="ai_chatbot_sql_modal" id="ai_chatbot_sql_modal" style="display:none">
+          <div class="ai_chatbot_sql_modal_inner">
+            <div class="ai_chatbot_sql_modal_header">
+              <span>Generated SQL</span>
+              <div>
+                <button class="ai_chatbot_action_btn" id="ai_chatbot_copy_sql">📋 Copy</button>
+                <button class="ai_chatbot_action_btn" id="ai_chatbot_close_sql">✕</button>
+              </div>
+            </div>
+            <pre class="ai_chatbot_sql_code" id="ai_chatbot_sql_code"/>
+          </div>
+        </div>
+
+        <!-- Input area -->
+        <div class="ai_chatbot_input_area">
+          <div class="ai_chatbot_input_wrap">
+            <textarea
+              class="ai_chatbot_input"
+              id="ai_chatbot_input"
+              placeholder="Ask a question about your business data... (Enter to send, Shift+Enter for new line)"
+              rows="1"/>
+            <button class="ai_chatbot_send_btn" id="ai_chatbot_send_btn">➤</button>
+          </div>
+          <div class="ai_chatbot_input_hint">
+            AI may make mistakes. Always verify important results.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </t>
+
+</templates>

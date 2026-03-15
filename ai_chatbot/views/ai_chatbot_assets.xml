@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!--
+    Odoo 11: inject CSS and JS into the backend asset bundle.
+    This file is loaded via the 'data' key in __manifest__.py.
+  -->
+  <template id="assets_backend" name="AI Chatbot Assets" inherit_id="web.assets_backend">
+    <xpath expr="." position="inside">
+      <link rel="stylesheet" href="/ai_chatbot/static/src/css/ai_chatbot.css"/>
+      <script type="text/javascript" src="/ai_chatbot/static/src/js/ai_chatbot.js"/>
+      <script type="text/javascript" src="/ai_chatbot/static/src/js/systray.js"/>
+    </xpath>
+  </template>
+</odoo>
